@@ -8,10 +8,12 @@ Inspired in JS files from Drupal Module <a href="https://drupal.org/project/back
 
 In your Drupal Server you must setup <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank">HTTP Access Control</a> to enable connection, below and example.
 
+````
 Access-Control-Allow-Credentials:true
 Access-Control-Allow-Headers:X-CSRF-Token
 Access-Control-Allow-Methods:POST,ADD,GET,PUT,DELETE,OPTIONS
 Access-Control-Allow-Origin:http://localhost:8080
+````
 
 You must change the origin to use the domain you are using to run your application.
 
