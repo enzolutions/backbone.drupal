@@ -29,9 +29,11 @@ I strong recommend to use the Drupal module <a href="https://drupal.org/project/
 
 ### ToDo
 
-Implement Collections for Taxonomies and Search
-Create integration with module Restws
-Create version of plugin for Drupal 8.
+<ul>
+  <li>Implement Collections for Taxonomies and Search</li>
+  <li>Create integration with module Restws</li>
+  <li>Create version of plugin for Drupal 8.</li>
+</ul>
 
 ### Usage
 
