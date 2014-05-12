@@ -1,9 +1,8 @@
 Backbone.Drupal is a standalone plugin to connect Marionette JS and Backbone JS applications with Drupal 7
-============================
 
 Inspired in JS files from Drupal Module <a href="https://drupal.org/project/backbone" target="_blank">https://drupal.org/project/backbone</a>
 
-## Features
+### Features
 
 **Cross-origin**: Enable to have Drupal as Backend in a Domain backend.com and the Backbone/Marionette App in other domain frontend.com.
 
@@ -26,13 +25,13 @@ I strong recommend to use the Drupal module <a href="https://drupal.org/project/
 
 **REST**: Integration with Services Server type REST
 
-## ToDo
+### ToDo
 
 Implement Collections for Taxonomies and Search
 Create integration with module Restws
 Create version of plugin for Drupal 8.
 
-## Usage
+### Usage
 
 ````
 <!DOCTYPE html>
