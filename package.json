@@ -1,0 +1,39 @@
+{
+  "name": "backbone.drupal",
+  "description": "Allows backbone models to work with Drupal via REST.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/enzolutions/backbone.drupal",
+  "author": {
+    "name": "enzo - Eduardo Garcia",
+    "email": "enzo@enzolutions.com",
+    "url": "http://enzolutions.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:enzolutions/backbone.drupal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/enzolutions/backbone.drupal/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/enzolutions/backbone.drupal/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-qunit": "0.1.1rc6",
+    "grunt": "0.4.0rc7"
+  },
+  "keywords": [
+    "backbone",
+    "plugin"
+  ]
+}
