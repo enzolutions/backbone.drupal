@@ -23,6 +23,21 @@ I strong recommend to use the Drupal module <a href="https://drupal.org/project/
 
 **Models**: Created Backbone models for Nodes, Users, Comments Entities
 
+You can add extra fields to modules to use as extra information in you application, these extra fields could be mark as *noSaveAttributes*. Check the following example.
+
+````
+var Property = Backbone.Drupal.Models.Node.extend({
+      initialize : function(options) {
+        // Setting the Id Attribute for Drupal model
+        this.attributes.nid = options.property_id;
+        this.noSaveAttributes = ['property_id'];
+
+        // Extended Backbone.Drupal.Models.Node to my own service for Drupal Nodes.
+        // This Rest service return absolute URL for field pictures
+        this.urlSource = "node_waterbed";
+       },
+````
+
 **Collections**: Created Backbone collection for Users, Nodes and Views
 
 **REST**: Integration with Services Server type REST
@@ -61,31 +76,32 @@ I strong recommend to use the Drupal module <a href="https://drupal.org/project/
         var Auth = new Backbone.Drupal.Auth({crossDomain: true});
         // Request executed in sync mode
         // If status is token further ajax will use the proper token
-        var status = Auth.login('admin', 'admin');
+        var auth_status =  = Auth.login('admin', 'admin');
 
-        console.log(status);
+        if(auth_status) {
 
-        /*
-          Check user retrieve
-        */
+          // Check user retrieve
 
-        var User = new Backbone.Drupal.Models.User({uid: 1});
-        User.fetch({
-          success: function (user) {
-            // Check information retrived, could be used directly in a template
-            console.log(user.attributes.mail);
-          }
-        });
-        /*
-          Check users retrive
-        */
-        var Users = new Backbone.Drupal.Collections.UserIndex();
-        Users.fetch({
-          success: function (users) {
-            // Check information retrived, could be used directly in a template
-            console.log(users.models[0].attributes.uri);
-          }
-        });
+          var User = new Backbone.Drupal.Models.User({uid: 1});
+          User.fetch({
+            success: function (user) {
+              // Check information retrived, could be used directly in a template
+              console.log(user.attributes.mail);
+            }
+          });
+
+          //  Check users retrive
+
+          var Users = new Backbone.Drupal.Collections.UserIndex();
+          Users.fetch({
+            success: function (users) {
+              // Check information retrived, could be used directly in a template
+              console.log(users.models[0].attributes.uri);
+            }
+          });
+        } else {
+          alert('Auth Error');
+        }
       });
 
     </script>

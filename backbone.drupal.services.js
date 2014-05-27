@@ -118,7 +118,13 @@ Backbone.Drupal.Collections.NodeView = Backbone.Drupal.Collections.Base.extend({
   },
   url: function() {
       var restEndpoint = Backbone.Drupal.restEndpoint.root + (Backbone.Drupal.restEndpoint.root.charAt(Backbone.Drupal.restEndpoint.root.length - 1) === '/' ? '' : '/');
-      return restEndpoint + "views/" + this.viewName  + Backbone.Drupal.restEndpoint.dataType;
+
+      return restEndpoint + "views/" + this.viewName  + Backbone.Drupal.restEndpoint.dataType + (typeof(this.filters) !== "undefined"? this.filters: '');
+  },
+  setFilters: function (filters) {
+    if(filters !== '') {
+      this.filters = filters;
+    }
   }
 });
 

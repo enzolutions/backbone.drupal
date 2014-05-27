@@ -61,9 +61,6 @@ Backbone.Drupal.Auth = (function(Backbone, $, _){
           //dataType : 'json',
           error: function(XMLHttpRequest, textStatus, errorThrown) {
               return false;
-              /*console.log(JSON.stringify(XMLHttpRequest));
-              console.log(JSON.stringify(textStatus));
-              console.log(JSON.stringify(errorThrown));*/
             },
           success : function(data) {
 
@@ -181,8 +178,10 @@ Backbone.Drupal.Models.Base = Backbone.Model.extend({
 
   // #### toJSONAttribute: process attribute into JSON if process funciton given.
   toJSONAttribute: function(attributeValue, attributeName) {
-    if (this.toJSONProcessors[attributeName]) {
-      attributeValue = this.toJSONProcessors[attributeName].call(this, attributeValue);
+    if (typeof this.toJSONProcessors !== 'undefined') {
+      if (this.toJSONProcessors[attributeName]) {
+        attributeValue = this.toJSONProcessors[attributeName].call(this, attributeValue);
+      }
     }
     return attributeValue;
   },
@@ -196,9 +195,10 @@ Backbone.Drupal.Models.Base = Backbone.Model.extend({
     // Modified from Backbone.js to ignore collection and add ".format" extension.
     var restEndpoint = Backbone.Drupal.restEndpoint.root + (Backbone.Drupal.restEndpoint.root.charAt(Backbone.Drupal.restEndpoint.root.length - 1) === '/' ? '' : '/');
     var base = restEndpoint + this.urlSource;
+
     if (this.isNew()) { return base; }
     // Add .json for format here.
-    return base + (base.charAt(base.length - 1) === '/' ? '' : '/') + encodeURIComponent(this.id) + Backbone.Drupal.restEndpoint.dataType;
+    return base + (base.charAt(base.length - 1) === '/' ? '' : '/') + encodeURIComponent(this.get(this.idAttribute)) + Backbone.Drupal.restEndpoint.dataType;
   },
 
   // TODO: evaluate moving all of this to Views.Base
