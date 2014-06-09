@@ -1,0 +1,32 @@
+{
+  "name": "backbone.drupal",
+  "main": [
+    "backbone.drupal.js",
+    "backbone.drupal.services.js"
+  ],
+  "version": "0.1.0-alpha",
+  "homepage": "http://enzolutions.com/projects/backbone_drupal/",
+  "author": {
+    "name": "enzo - Eduardo Garcia",
+    "email": "enzo@enzolutions.com"
+  },
+  "description": "Backbone.drupal extension provides Drupal compatible using Services module",
+  "keywords": [
+    "backbone",
+    "marionette",
+    "drupal"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "1.0.0 - 1.1.2",
+    "underscore": "1.4.4 - 1.6.0",
+    "jquery": "^1.8.0 || ^2.0.0"
+  },
+}
