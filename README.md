@@ -14,7 +14,7 @@ $ bower install backbone.drupal
 
 #### Include as dependencie
 
-If your application has a list of bower dependencies, you can include as dependencie as shown below.
+If your application has a list of bower dependencies, you can include as dependency as shown below.
 
 ```
 {
