@@ -2,6 +2,33 @@ Backbone.Drupal is a standalone plugin to connect Marionette JS and Backbone JS 
 
 Inspired in JS files from Drupal Module <a href="https://drupal.org/project/backbone" target="_blank">https://drupal.org/project/backbone</a>
 
+### Bower install
+
+If you are using <a target="_blank" href="http://bower.io/">Bower</a> you can download Backbone.drupal following this instructions
+
+#### Bower command
+
+```
+$ bower install backbone.drupal
+```
+
+#### Include as dependencie
+
+If your application has a list of bower dependencies, you can include as dependencie as shown below.
+
+```
+{
+  "name": "YOURAPP",
+  "version": "0.0.0",
+  "dependencies": {
+    "backbone.drupal": "~0.1.0-beta",
+  },
+}
+
+Check the releases section to verify the latest version.
+
+```
+
 ### Features
 
 **Cross-origin**: Enable to have Drupal as Backend in a Domain backend.com and the Backbone/Marionette App in other domain frontend.com.
