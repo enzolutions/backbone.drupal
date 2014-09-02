@@ -31,7 +31,19 @@ Check the releases section to verify the latest version.
 
 ### Features
 
-**Cross-origin**: Enable to have Drupal as Backend in a Domain backend.com and the Backbone/Marionette App in other domain frontend.com.
+####Cross-origin: Enable to have Drupal as Backend in a Domain backend.com and the Backbone/Marionette App in other domain frontend.com.
+
+##### Drupal 8
+
+Because the mode https://www.drupal.org/project/cors doesn't have a version for Drupal 8 yet I recommend use Apache 2 and enable CORS using .htaccess using the following command
+
+```
+Header set Access-Control-Allow-Origin "*"
+```
+
+More information at http://enable-cors.org/server_apache.html
+
+##### Drupal 7
 
 In your Drupal Server you must setup <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank">HTTP Access Control</a> to enable connection, below and example.
 
