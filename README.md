@@ -31,7 +31,9 @@ Check the releases section to verify the latest version.
 
 ### Features
 
-####Cross-origin: Enable to have Drupal as Backend in a Domain backend.com and the Backbone/Marionette App in other domain frontend.com.
+####Cross-origin
+
+Enable to have Drupal as Backend in a Domain backend.com and the Backbone/Marionette App in other domain frontend.com.
 
 ##### Drupal 8
 
