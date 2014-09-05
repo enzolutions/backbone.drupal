@@ -68,6 +68,16 @@ When issues https://www.drupal.org/node/1869548 and https://www.drupal.org/node/
 
 More information at http://enable-cors.org/server_apache.html
 
+###### Auth
+
+Drupal 8 doesn't implement yet the end point /user/login to enable remote login, this method in Drupal allow validate the credentials and request a CRS Token to be used in further request.
+
+Right now there are only two methods of authentications Cookie (same domain) and Basic Auth for remote request, becuase this library is oriented to create a fronted 100% separate of backed the Auth process use Basic Auth.
+
+When function Auth is called the credentials are not validated, they are just encoded using base64 and configured to use the enconded credentials in further request. 
+
+Remember the credentials travel to your backend server **encoded** NOT **encrypted** for tha reason you **MUST** use a SSL certificate in your backend site to protect your users.
+
 ##### Drupal 7
 
 In your Drupal Server you must setup <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank">HTTP Access Control</a> to enable connection, below an example.
