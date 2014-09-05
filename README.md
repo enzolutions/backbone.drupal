@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Bower install](#bower-install)
+  - [Bower command](#bower-command)
+  - [Include as dependencie](#include-as-dependencie)
+- [Features](#features)
+  - [Cross-origin](#cross-origin)
+    - [Drupal 8](#drupal-8)
+      - [Auth](#auth)
+    - [Drupal 7](#drupal-7)
+- [ToDo](#todo)
+- [Usage](#usage)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Backbone.Drupal is a standalone plugin to connect Marionette JS and Backbone JS applications with Drupal 7/8
 
 Originally Inspired in JS files from Drupal 7 Module <a href="https://drupal.org/project/backbone" target="_blank">https://drupal.org/project/backbone</a>
@@ -74,7 +91,7 @@ Drupal 8 doesn't implement yet the end point /user/login to enable remote login,
 
 Right now there are only two methods of authentications Cookie (same domain) and Basic Auth for remote request, becuase this library is oriented to create a fronted 100% separate of backed the Auth process use Basic Auth.
 
-When function Auth is called the credentials are not validated, they are just encoded using base64 and configured to use the enconded credentials in further request. 
+When function Auth is called the credentials are not validated, they are just encoded using base64 and configured to use the enconded credentials in further request.
 
 Remember the credentials travel to your backend server **encoded** NOT **encrypted** for tha reason you **MUST** use a SSL certificate in your backend site to protect your users.
 
