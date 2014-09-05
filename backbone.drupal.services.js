@@ -92,7 +92,7 @@ Backbone.Drupal.Collections.NodeIndex = Backbone.Drupal.Collections.Base.extend(
   model: Backbone.Drupal.Models.Node,
   url: function() {
       var restEndpoint = Backbone.Drupal.restEndpoint.root + (Backbone.Drupal.restEndpoint.root.charAt(Backbone.Drupal.restEndpoint.root.length - 1) === '/' ? '' : '/');
-      return restEndpoint + "node" . Backbone.Drupal.restEndpoint.dataType;
+      return restEndpoint + "node" + Backbone.Drupal.restEndpoint.dataType;
   }
 });
 
