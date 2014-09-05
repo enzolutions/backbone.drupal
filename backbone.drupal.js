@@ -24,7 +24,7 @@ Backbone.Drupal.Auth = (function(Backbone, $, _){
 
     // Set defaults. These are the only attributes allowed.
     function defaults() {
-      return { crossDomain: false };
+      return { crossDomain: false, drupal8: true };
     }
 
     // Set attributes
@@ -53,37 +53,64 @@ Backbone.Drupal.Auth = (function(Backbone, $, _){
         var status = false;
         var restEndpoint = Backbone.Drupal.restEndpoint.root + (Backbone.Drupal.restEndpoint.root.charAt(Backbone.Drupal.restEndpoint.root.length - 1) === '/' ? '' : '/');
 
-        jQuery.ajax({
-          async: false,
-          url :  restEndpoint + 'user/login' + Backbone.Drupal.restEndpoint.dataType,
-          type : 'post',
-          data : 'username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password),
-          //dataType : 'json',
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-              return false;
-            },
-          success : function(data) {
+        if(attributes.drupal8) {
+          // Prepare further calls to use Basic Auth againt drupal 8 and set a cookie
+          var settings = {
+            beforeSend: function (request) {
+              request.setRequestHeader ('Authorization', 'Basic ' + btoa(username + ':' + password));
+              //request.setRequestHeader ('Accept', 'application/json');
+              request.setRequestHeader ( "Content-type", "application/x-www-form-urlencoded" );
+            }
+          };
 
-              var settings = {
-                beforeSend: function (request) {
-                  request.setRequestHeader("X-CSRF-Token", data.token);
-                }
-              };
+          if(attributes.crossDomain) {
+            /*settings.xhrFields = {
+              withCredentials: true
+            };*/
 
-              if(attributes.crossDomain) {
-                settings.xhrFields = {
-                  withCredentials: true
+            //settings.crossDomain = true;
+          }
+
+          // Define specific parametres to be used in all future request.
+          $.ajaxSetup(settings);
+
+          console.log(btoa(username + ':' + password));
+          status=true;
+        }
+        else if(attributes.drupal8 === false) {
+          // Call user/login end point to get CSR token an use in following calls
+          jQuery.ajax({
+            async: false,
+            url :  restEndpoint + 'user/login' + Backbone.Drupal.restEndpoint.dataType,
+            type : 'post',
+            data : 'username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password),
+            //dataType : 'json',
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                return false;
+              },
+            success : function(data) {
+
+                var settings = {
+                  beforeSend: function (request) {
+                    request.setRequestHeader("X-CSRF-Token", data.token);
+                  }
                 };
 
-                settings.crossDomain = true;
+                if(attributes.crossDomain) {
+                  settings.xhrFields = {
+                    withCredentials: true
+                  };
+
+                  settings.crossDomain = true;
+                }
+
+                // Define specific parametres to be used in all future request.
+                $.ajaxSetup(settings);
+
+                status=true;
               }
-
-              // Define specific parametres to be used in all future request.
-              $.ajaxSetup(settings);
-
-              status=true;
-            }
-        });
+          });
+        }
 
         return status;
       }.bind(this),
@@ -109,7 +136,6 @@ Backbone.Drupal.Auth = (function(Backbone, $, _){
 
   return Auth;
 })(Backbone, jQuery, _);
-
 
 Backbone.Drupal.Models = {};
 
@@ -197,8 +223,14 @@ Backbone.Drupal.Models.Base = Backbone.Model.extend({
     var base = restEndpoint + this.urlSource;
 
     if (this.isNew()) { return base; }
-    // Add .json for format here.
-    return base + (base.charAt(base.length - 1) === '/' ? '' : '/') + encodeURIComponent(this.get(this.idAttribute)) + Backbone.Drupal.restEndpoint.dataType;
+    var url_endpoint = base + (base.charAt(base.length - 1) === '/' ? '' : '/') + encodeURIComponent(this.get(this.idAttribute));
+
+    if(Backbone.Drupal.restEndpoint.drupal8 == false) {
+      // Add .json for format here.
+      url_endpoint = url_endpoint + urlBackbone.Drupal.restEndpoint.dataType;
+    }
+
+    return url_endpoint;
   },
 
   // TODO: evaluate moving all of this to Views.Base

@@ -15,10 +15,11 @@
       $(function() {
         // Set API Information
         Backbone.Drupal.restEndpoint = {
-          root: 'http://drupal8'
+          root: 'http://onthisday/api',
+          dataType: '.json'
         };
         // Define auth object, set crossDomain if is necessary
-        var Auth = new Backbone.Drupal.Auth({crossDomain: true});
+        var Auth = new Backbone.Drupal.Auth({crossDomain: true, drupal8: false});
         // Request executed in sync mode
         // If status is token further ajax will use the proper token
         var status = Auth.login('admin', 'admin');
@@ -34,6 +35,16 @@
           success: function (user) {
             // Check information retrived, could be used directly in a template
             console.log(user.attributes.mail);
+          }
+        });
+        /*
+          Check users retrive
+        */
+        var Users = new Backbone.Drupal.Collections.UserIndex();
+        Users.fetch({
+          success: function (users) {
+            // Check information retrived, could be used directly in a template
+            console.log(users.models[0].attributes.uri);
           }
         });
       });

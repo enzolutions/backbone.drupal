@@ -37,17 +37,40 @@ Enable to have Drupal as Backend in a Domain backend.com and the Backbone/Marion
 
 ##### Drupal 8
 
-Because the mode https://www.drupal.org/project/cors doesn't have a version for Drupal 8 yet I recommend use Apache 2 and enable CORS using .htaccess using the following command
+Because the mode https://www.drupal.org/project/cors doesn't have a version for Drupal 8 yet and Drupal Core still doesn't have a solution for that I did a <a href="https://www.drupal.org/files/issues/core-cors-headers-1869548-26.patch">patch</a> for .htacces to enable CORS request using jQuery documented in issue # https://www.drupal.org/node/1869548#comment-9120317
 
 ```
-Header set Access-Control-Allow-Origin "*"
+diff --git a/.htaccess b/.htaccess
+index c32b182..b0bf563 100644
+--- a/.htaccess
++++ b/.htaccess
+@@ -118,6 +118,10 @@ DirectoryIndex index.php index.html index.htm
+   RewriteCond %{REQUEST_URI} !core
+   RewriteRule ^ %1/core/%2 [L,QSA,R=301]
+
++  # Intercept OPTIONS calls
++  RewriteCond %{REQUEST_METHOD} OPTIONS
++  RewriteRule .* / [R=200,L]
++
+   # Pass all requests not referring directly to files in the filesystem to
+   # index.php.
+   RewriteCond %{REQUEST_FILENAME} !-f
+@@ -165,3 +169,7 @@ DirectoryIndex index.php index.html index.htm
+     </FilesMatch>
+   </IfModule>
+ </IfModule>
++
++Header always set Access-Control-Allow-Origin "*"
++Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, PATCH, DELETE"
++Header always set Access-Control-Allow-Headers: Authorization
 ```
+When issues https://www.drupal.org/node/1869548 and https://www.drupal.org/node/2237231 get resolved this implementation will be updated.
 
 More information at http://enable-cors.org/server_apache.html
 
 ##### Drupal 7
 
-In your Drupal Server you must setup <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank">HTTP Access Control</a> to enable connection, below and example.
+In your Drupal Server you must setup <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank">HTTP Access Control</a> to enable connection, below an example.
 
 ````
 Access-Control-Allow-Credentials:true
@@ -87,11 +110,13 @@ var Property = Backbone.Drupal.Models.Node.extend({
 
 <ul>
   <li>Implement Collections for Taxonomies and Search</li>
-  <li>Create integration with module Restws</li>
-  <li>Create version of plugin for Drupal 8.</li>
+  <li>Create integration with module Restws in Drupal 7</li>
+  <li>Test Drupal 8 POST method and Views integrations.</li>
 </ul>
 
 ### Usage
+
+Check **test/index.html** for Drupal 8 example and **indexd7.html** for  Drupal 7 example.
 
 ````
 <!DOCTYPE html>

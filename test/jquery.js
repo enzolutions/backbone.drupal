@@ -9656,6 +9656,8 @@ if ( xhrSupported ) {
 						// To keep consistent with other XHR implementations, cast the value
 						// to string and ignore `undefined`.
 						if ( headers[ i ] !== undefined ) {
+							//console.log(i);
+							//console.log(headers[ i ]);
 							xhr.setRequestHeader( i, headers[ i ] + "" );
 						}
 					}
@@ -9663,6 +9665,8 @@ if ( xhrSupported ) {
 					// Do send the request
 					// This may raise an exception which is actually
 					// handled in jQuery.ajax (so no try/catch here)
+					console.log(options);
+					console.log(options.hasContent && options.data);
 					xhr.send( ( options.hasContent && options.data ) || null );
 
 					// Listener
