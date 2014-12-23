@@ -33,6 +33,7 @@
         User.fetch({
           success: function (user) {
             // Check information retrived, could be used directly in a template
+            console.log(user.attributes);
             console.log(user.attributes.mail[0].value);
           }
         });

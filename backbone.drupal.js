@@ -74,7 +74,6 @@ Backbone.Drupal.Auth = (function(Backbone, $, _){
           // Define specific parametres to be used in all future request.
           $.ajaxSetup(settings);
 
-          console.log(btoa(username + ':' + password));
           status=true;
         }
         else if(attributes.drupal8 === false) {
