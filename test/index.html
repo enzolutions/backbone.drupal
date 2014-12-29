@@ -17,6 +17,10 @@
         Backbone.Drupal.restEndpoint = {
           root: 'http://drupal8'
         };
+
+        // Set Backform Compatibility (amiliaapp.github.io/backform/index.html)
+        //Backbone.Drupal.backform = true;
+
         // Define auth object, set crossDomain if is necessary
         var Auth = new Backbone.Drupal.Auth({crossDomain: true});
         // Request executed in sync mode

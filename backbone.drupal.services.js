@@ -6,7 +6,6 @@
 // ## Backbone Drupal Models
 
 // ### Backbone.Drupal.Node
-//
 // Model for nodes.
 Backbone.Drupal.Models.Node = Backbone.Drupal.Models.Base.extend({
   urlSource: "node",
@@ -19,9 +18,26 @@ Backbone.Drupal.Models.Node = Backbone.Drupal.Models.Base.extend({
   },
 
   toJSON: function() {
-    return {
-      node: Backbone.Drupal.Models.Base.prototype.toJSON.call(this)
-    };
+    if(Backbone.Drupal.backform) {
+      return Backbone.Drupal.Models.Base.prototype.toJSON.call(this);
+    }
+    else {
+      return {
+        node: Backbone.Drupal.Models.Base.prototype.toJSON.call(this)
+      };
+    }
+  },
+  parse: function (data) {
+      if(Backbone.Drupal.backform) {
+        var attributes = [];
+        _.each(data, function(element, index, list) {
+          attributes[index] = element[0].value;
+        });
+        return attributes;
+      }
+      else {
+        return data;
+      }
   },
 
   // Processor for Boolean values, needed due to way Services treats "false".
@@ -56,11 +72,27 @@ Backbone.Drupal.Models.Comment = Backbone.Drupal.Models.Base.extend({
   // Override toJSON function to nest all attributes in a { comment: ... } key
   // to make this work with the Services module implementation of comment PUSH/PUT.
   toJSON: function() {
-    var data = {
-      comment: Backbone.Drupal.Models.Base.prototype.toJSON.call(this)
-    };
-    return data;
-  }
+    if(Backbone.Drupal.backform) {
+      return Backbone.Drupal.Models.Base.prototype.toJSON.call(this);
+    }
+    else {
+      return {
+        comment: Backbone.Drupal.Models.Base.prototype.toJSON.call(this)
+      };
+    }
+  },
+  parse: function (data) {
+      if(Backbone.Drupal.backform) {
+        var attributes = [];
+        _.each(data, function(element, index, list) {
+          attributes[index] = element[0].value;
+        });
+        return attributes;
+      }
+      else {
+        return data;
+      }
+  },
 });
 
 // ### Backbone.Drupal.File
@@ -71,13 +103,30 @@ Backbone.Drupal.Models.File = Backbone.Drupal.Models.Base.extend({
   idAttribute: "fid",
 
   // Override toJSON function to nest all attributes in a { file: ... } key
-  // to make this work with the Services module implementation of file PUSH/PUT.
+  // to make this work with the Services module implementation of file PUSH/PUT.turn data;
   toJSON: function() {
-    var data = {
-      file: Backbone.Drupal.Models.Base.prototype.toJSON.call(this)
-    };
-    return data;
-  }
+    if(Backbone.Drupal.backform) {
+      return Backbone.Drupal.Models.Base.prototype.toJSON.call(this);
+    }
+    else {
+      return {
+        file: Backbone.Drupal.Models.Base.prototype.toJSON.call(this)
+      };
+    }
+  },
+  parse: function (data) {
+      if(Backbone.Drupal.backform) {
+        var attributes = [];
+        _.each(data, function(element, index, list) {
+          attributes[index] = element[0].value;
+        });
+        return attributes;
+      }
+      else {
+        return data;
+      }
+  },
+
 });
 
 
@@ -92,7 +141,7 @@ Backbone.Drupal.Collections.NodeIndex = Backbone.Drupal.Collections.Base.extend(
   model: Backbone.Drupal.Models.Node,
   url: function() {
       var restEndpoint = Backbone.Drupal.restEndpoint.root + (Backbone.Drupal.restEndpoint.root.charAt(Backbone.Drupal.restEndpoint.root.length - 1) === '/' ? '' : '/');
-      return restEndpoint + "node" + Backbone.Drupal.restEndpoint.dataType;
+      return restEndpoint + "node" . Backbone.Drupal.restEndpoint.dataType;
   }
 });
 

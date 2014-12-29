@@ -1,7 +1,7 @@
 {
   "name": "backbone.drupal",
   "description": "Allows backbone models to work with Drupal via REST.",
-  "version": "0.1.0",
+  "version": "0.2.0-beta",
   "homepage": "https://github.com/enzolutions/backbone.drupal",
   "author": {
     "name": "enzo - Eduardo Garcia",
