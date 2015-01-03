@@ -319,6 +319,10 @@ Backbone.Drupal.Collections.Base = Backbone.Collection.extend({
     }
     // Call Super fetch function with options array including any collection params.
     Backbone.Collection.prototype.fetch.call(this, options);
-  }
+  },
+  url: function() {
+    var url_endpoint = Backbone.Drupal.restEndpoint.root + '/' + this.urlSource;
+    return url_endpoint;
+  },
 });
 

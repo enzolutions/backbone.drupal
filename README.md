@@ -131,40 +131,34 @@ Check the releases section to verify the latest version.
 
 ##Cross-origin
 
-Enable to have Drupal as Backend in a Domain backend.com and the Backbone/Marionette App in other domain frontend.com.
+Using [CORS](http://enzolutions.com/articles/2014/05/31/what-is-cross-origin-resource-sharing-cors/) we can use Drupal as Backend Server in a Domain i.e **backend.com** and user a Backbone/Marionette App as Front End server in other domain i.e **frontend.com**.
 
 ### Drupal 8
 
-Because the mode https://www.drupal.org/project/cors doesn't have a version for Drupal 8 yet and Drupal Core still doesn't have a solution for that I did a <a href="https://www.drupal.org/files/issues/core-cors-headers-1869548-26.patch">patch</a> for .htacces to enable CORS request using jQuery documented in issue # https://www.drupal.org/node/1869548#comment-9120317
+Because the Drupal module [CORS](https://www.drupal.org/project/cors) doesn't have a version for Drupal 8 yet and Drupal Core won't have a native solution for that until Drupal 8.1.
+
+I propose a <a href="https://www.drupal.org/files/issues/core-cors-headers-1869548-26.patch">patch</a> for .htacces in order to enable CORS requests using jQuery documented in [issue](https://www.drupal.org/node/1869548#comment-9120317)
+
+In summary you only have to accept the OPTIONS requests as you can see in the following instructions to .htacces
+```
+# Intercept OPTIONS calls
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule .* / [R=200,L]
+```
+
+Also we have to enable REST Methdos POST, GET, OPTIONS, PATCH, DELETE and allow request from different origin. Check the instructions below.
 
 ```
-diff --git a/.htaccess b/.htaccess
-index c32b182..b0bf563 100644
---- a/.htaccess
-+++ b/.htaccess
-@@ -118,6 +118,10 @@ DirectoryIndex index.php index.html index.htm
-   RewriteCond %{REQUEST_URI} !core
-   RewriteRule ^ %1/core/%2 [L,QSA,R=301]
-
-+  # Intercept OPTIONS calls
-+  RewriteCond %{REQUEST_METHOD} OPTIONS
-+  RewriteRule .* / [R=200,L]
-+
-   # Pass all requests not referring directly to files in the filesystem to
-   # index.php.
-   RewriteCond %{REQUEST_FILENAME} !-f
-@@ -165,3 +169,7 @@ DirectoryIndex index.php index.html index.htm
-     </FilesMatch>
-   </IfModule>
- </IfModule>
-+
-+Header always set Access-Control-Allow-Origin "*"
-+Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, PATCH, DELETE"
-+Header always set Access-Control-Allow-Headers: Authorization
+<IfModule mod_headers.c>
+  Header always set Access-Control-Allow-Origin "*"
+  Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, PATCH, DELETE"
+  Header always set Access-Control-Allow-Headers: Authorization
+</IfModule>
 ```
+
+Also a intructions to enable Basic Auth is required.
+
 When issues https://www.drupal.org/node/1869548 and https://www.drupal.org/node/2237231 get resolved this implementation will be updated.
-
-More information at http://enable-cors.org/server_apache.html
 
 #### Auth
 
