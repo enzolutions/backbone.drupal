@@ -187,7 +187,7 @@ I strong recommend to use the Drupal module <a href="https://drupal.org/project/
 
 **Authentication**: Option login with Drupal user account to enable to execute REST operation PUT, DELETE, ADD. If Cross-origin is enabled login is required for GET operations.
 
-**Models**: Created Backbone models for Nodes, Users, Comments Entities
+**Models**: Created Backbone models for Nodes, Users and Comments Entities
 
 You can add extra fields to modules to use as extra information in you application, these extra fields could be mark as *noSaveAttributes*. Check the following example.
 
@@ -204,8 +204,20 @@ var Property = Backbone.Drupal.Models.Node.extend({
        },
 ````
 
-**Collections**: Created Backbone collection for Users, Nodes and Views
+**Collections**: Right now we have two kind of collections
 
+- Generic: Enabel to call a Custom REST End Point in Drupal check the following code
+
+```
+var myCollection =  Backbone.Drupal.Collection.extend({
+    initialize: function() {
+      console.log("initialize a Custom collection");
+      this.model =  myModel;
+      this.urlSource = "custon/end/point";
+   }
+```
+
+- Entities: Enable to create to generic REST End point in Drupal to fetch list of Users, Nodes and Views
 **REST**: Integration with Services Server type REST
 
 # ToDo
