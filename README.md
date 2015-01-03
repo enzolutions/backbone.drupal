@@ -206,7 +206,7 @@ var Property = Backbone.Drupal.Models.Node.extend({
 
 **Collections**: Right now we have two kind of collections
 
-- Generic: Enabel to call a Custom REST End Point in Drupal check the following code
+- Generic: Enable to call a Custom REST End Point in Drupal check the following code
 
 ```
 var myCollection =  Backbone.Drupal.Collection.extend({
@@ -217,7 +217,8 @@ var myCollection =  Backbone.Drupal.Collection.extend({
    }
 ```
 
-- Entities: Enable to create to generic REST End point in Drupal to fetch list of Users, Nodes and Views
+- Entities: Enable to create to generic REST End point in Drupal to fetch list of Users, Nodes and Views.
+
 **REST**: Integration with Services Server type REST
 
 # ToDo
