@@ -129,7 +129,7 @@ Check the releases section to verify the latest version.
 
 # Features
 
-**Authentication**: Option login with Drupal user account to enable to execute REST operation PUT, DELETE, ADD. If Cross-origin is enabled login is required for GET operations.
+**Authentication**: Option login with Drupal user account to enable to execute REST operation PUT, DELETE, ADD. If Cross-origin is enabled login is required for operations.
 
 **REST**: Integration with Services Server type REST
 
