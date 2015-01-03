@@ -129,6 +129,46 @@ Check the releases section to verify the latest version.
 
 # Features
 
+**Authentication**: Option login with Drupal user account to enable to execute REST operation PUT, DELETE, ADD. If Cross-origin is enabled login is required for GET operations.
+
+**REST**: Integration with Services Server type REST
+
+**Models**: Created Backbone models for Nodes, Users and Comments Entities
+
+You can add extra fields to modules to use as extra information in you application, these extra fields could be mark as *noSaveAttributes*. Check the following example.
+
+````
+var Property = Backbone.Drupal.Models.Node.extend({
+      initialize : function(options) {
+        // Setting the Id Attribute for Drupal model
+        this.attributes.nid = options.property_id;
+        this.noSaveAttributes = ['property_id'];
+
+        // Extended Backbone.Drupal.Models.Node to my own service for Drupal Nodes.
+        // This Rest service return absolute URL for field pictures
+        this.urlSource = "node_waterbed";
+       },
+````
+
+
+**Collections**:
+
+Right now we have two kind of collections
+
+- Entity Collections: Enable to create to generic REST End point in Drupal to fetch list of Users, Nodes and Views.
+
+
+- Generic Collections: Enable to call a Custom REST End Point in Drupal, check the following example
+
+```
+var myCollection =  Backbone.Drupal.Collection.extend({
+    initialize: function() {
+      console.log("initialize a Custom collection");
+      this.model =  myModel;
+      this.urlSource = "custon/end/point";
+   }
+```
+
 ##Cross-origin
 
 Using [CORS](http://enzolutions.com/articles/2014/05/31/what-is-cross-origin-resource-sharing-cors/) we can use Drupal as Backend Server in a Domain i.e **backend.com** and user a Backbone/Marionette App as Front End server in other domain i.e **frontend.com**.
@@ -184,42 +224,6 @@ Access-Control-Allow-Origin:http://localhost:8080
 You must change the origin to use the domain you are using to run your application.
 
 I strong recommend to use the Drupal module <a href="https://drupal.org/project/cors" target="_blank">CORS</a> to configure the HTTP Access Control
-
-**Authentication**: Option login with Drupal user account to enable to execute REST operation PUT, DELETE, ADD. If Cross-origin is enabled login is required for GET operations.
-
-**Models**: Created Backbone models for Nodes, Users and Comments Entities
-
-You can add extra fields to modules to use as extra information in you application, these extra fields could be mark as *noSaveAttributes*. Check the following example.
-
-````
-var Property = Backbone.Drupal.Models.Node.extend({
-      initialize : function(options) {
-        // Setting the Id Attribute for Drupal model
-        this.attributes.nid = options.property_id;
-        this.noSaveAttributes = ['property_id'];
-
-        // Extended Backbone.Drupal.Models.Node to my own service for Drupal Nodes.
-        // This Rest service return absolute URL for field pictures
-        this.urlSource = "node_waterbed";
-       },
-````
-
-**Collections**: Right now we have two kind of collections
-
-- Generic: Enable to call a Custom REST End Point in Drupal check the following code
-
-```
-var myCollection =  Backbone.Drupal.Collection.extend({
-    initialize: function() {
-      console.log("initialize a Custom collection");
-      this.model =  myModel;
-      this.urlSource = "custon/end/point";
-   }
-```
-
-- Entities: Enable to create to generic REST End point in Drupal to fetch list of Users, Nodes and Views.
-
-**REST**: Integration with Services Server type REST
 
 # ToDo
 
