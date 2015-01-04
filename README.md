@@ -21,6 +21,7 @@ Originally Inspired in JS files from Drupal 7 Module <a href="https://drupal.org
 
 Backbone.Drupal has compatibility with [Backform](http://amiliaapp.github.io/backform/index.html) Drupal 8 return an object for each property if you enable this compatibility attibuttes will be flatten to an array with value property. But this feature could be used for other implementations.
 
+Also in included in [Yeoman Marionette Drupal Generator](github.com/enzolutions/generator-marionette-drupal) if you are interested in start with a more sofisticated implementation in a [Headless Drupal](groups.drupal.org/headless-drupal) soltuion
 
 # Usage
 
@@ -171,7 +172,7 @@ var myCollection =  Backbone.Drupal.Collection.extend({
 
 ##Cross-origin
 
-Using [CORS](http://enzolutions.com/articles/2014/05/31/what-is-cross-origin-resource-sharing-cors/) we can use Drupal as Backend Server in a Domain i.e **backend.com** and user a Backbone/Marionette App as Front End server in other domain i.e **frontend.com**.
+Using [CORS](http://enzolutions.com/articles/2014/05/31/what-is-cross-origin-resource-sharing-cors/) we can use Drupal as Backend Server in a Domain i.e **backend.com** and use for instance a Backbone/Marionette App as Front End server in other domain i.e **frontend.com**.
 
 ### Drupal 8
 
