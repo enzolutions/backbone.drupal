@@ -19,7 +19,7 @@ Backbone.Drupal is a standalone plugin to connect Marionette JS and Backbone JS 
 
 Originally Inspired in JS files from Drupal 7 Module <a href="https://drupal.org/project/backbone" target="_blank">https://drupal.org/project/backbone</a>
 
-Backbone.Drupal has compatibility with [Backform](http://amiliaapp.github.io/backform/index.html) Drupal 8 return an object for each property if you enable this compatibility attibuttes will be flatten to an array with value property. But this feature could be used for other implementations.
+Backbone.Drupal has compatibility with [Backform](http://amiliaapp.github.io/backform/index.html) Drupal 8 return an object for each property if you enable this compatibility attibuttes will be flatten to an array property -> value. But this feature could be used for other implementations.
 
 
 # Usage
@@ -56,9 +56,6 @@ Your configuration must look similar to following image.
           dataType: '.json'
         };
 
-        // Set Backform Compatibility (amiliaapp.github.io/backform/index.html)
-        //Backbone.Drupal.backform = true;
-
         // Define auth object, set crossDomain if is necessary
         var Auth = new Backbone.Drupal.Auth({crossDomain: true});
         // Request executed in sync mode
@@ -69,7 +66,8 @@ Your configuration must look similar to following image.
 
           // Check user retrieve
 
-          var User = new Backbone.Drupal.Models.User({uid: 1});
+          // Set Backform Compatibility (amiliaapp.github.io/backform/index.html)
+          var User = new Backbone.Drupal.Models.User({uid: 1, backform: true});
           User.fetch({
             success: function (user) {
               // Check information retrived, could be used directly in a template

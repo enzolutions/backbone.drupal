@@ -18,7 +18,7 @@ Backbone.Drupal.Models.Node = Backbone.Drupal.Models.Base.extend({
   },
 
   toJSON: function() {
-    if(Backbone.Drupal.backform) {
+    if(this.backform) {
       return Backbone.Drupal.Models.Base.prototype.toJSON.call(this);
     }
     else {
@@ -28,7 +28,7 @@ Backbone.Drupal.Models.Node = Backbone.Drupal.Models.Base.extend({
     }
   },
   parse: function (data) {
-      if(Backbone.Drupal.backform) {
+      if(this.backform) {
         var attributes = [];
         _.each(data, function(element, index, list) {
           attributes[index] = element[0].value;
@@ -72,7 +72,7 @@ Backbone.Drupal.Models.Comment = Backbone.Drupal.Models.Base.extend({
   // Override toJSON function to nest all attributes in a { comment: ... } key
   // to make this work with the Services module implementation of comment PUSH/PUT.
   toJSON: function() {
-    if(Backbone.Drupal.backform) {
+    if(this.backform) {
       return Backbone.Drupal.Models.Base.prototype.toJSON.call(this);
     }
     else {
@@ -82,7 +82,7 @@ Backbone.Drupal.Models.Comment = Backbone.Drupal.Models.Base.extend({
     }
   },
   parse: function (data) {
-      if(Backbone.Drupal.backform) {
+      if(this.backform) {
         var attributes = [];
         _.each(data, function(element, index, list) {
           attributes[index] = element[0].value;
@@ -105,7 +105,7 @@ Backbone.Drupal.Models.File = Backbone.Drupal.Models.Base.extend({
   // Override toJSON function to nest all attributes in a { file: ... } key
   // to make this work with the Services module implementation of file PUSH/PUT.turn data;
   toJSON: function() {
-    if(Backbone.Drupal.backform) {
+    if(this.backform) {
       return Backbone.Drupal.Models.Base.prototype.toJSON.call(this);
     }
     else {
@@ -115,7 +115,7 @@ Backbone.Drupal.Models.File = Backbone.Drupal.Models.Base.extend({
     }
   },
   parse: function (data) {
-      if(Backbone.Drupal.backform) {
+      if(this.backform) {
         var attributes = [];
         _.each(data, function(element, index, list) {
           attributes[index] = element[0].value;
