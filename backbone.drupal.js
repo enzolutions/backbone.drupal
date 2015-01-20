@@ -24,7 +24,7 @@ Backbone.Drupal.Auth = (function(Backbone, $, _){
 
     // Set defaults. These are the only attributes allowed.
     function defaults() {
-      return { crossDomain: false, version: 7, dataType: '' };
+      return { crossDomain: false };
     }
 
     // Set attributes
@@ -53,7 +53,7 @@ Backbone.Drupal.Auth = (function(Backbone, $, _){
         var status = false;
         var restEndpoint = Backbone.Drupal.restEndpoint.root + (Backbone.Drupal.restEndpoint.root.charAt(Backbone.Drupal.restEndpoint.root.length - 1) === '/' ? '' : '/');
 
-        if(attributes.version == 8) {
+        if(Backbone.Drupal.restEndpoint.version == 8) {
           // Prepare further calls to use Basic Auth againt drupal 8 and set a cookie
           var settings = {
             beforeSend: function (request) {
@@ -76,7 +76,7 @@ Backbone.Drupal.Auth = (function(Backbone, $, _){
 
           status=true;
         }
-        else if(attributes.version != 8) {
+        else if(Backbone.Drupal.restEndpoint.version != 8) {
           // Call user/login end point to get CSR token an use in following calls
           jQuery.ajax({
             async: false,
