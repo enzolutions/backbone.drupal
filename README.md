@@ -29,7 +29,7 @@ Check **test/index.html** for Drupal 8 example and **indexd7.html** for  Drupal 
 
 Before to test in Drupal 8 be sure the REST Resource Content for methods Get, Post, Update , Delete and Patch has json as format and Basic Auth as Authentication method.
 
-You can the contributed module [Rest UI](https://www.drupal.org/project/restui) I recommend use the git version until Drupal 8 get his first official release.
+You can do this with the contributed module [Rest UI](https://www.drupal.org/project/restui) I recommend use the git version until Drupal 8 get his first official release.
 
 Your configuration must look similar to following image.
 
@@ -53,8 +53,9 @@ Your configuration must look similar to following image.
       $(function() {
         // Set API Information
         Backbone.Drupal.restEndpoint = {
-          root: 'http://onthisday/api',
-          dataType: '.json'
+          root: 'http://example.com', // Set Drupal Backend Server URL
+          version: 8
+          //dataType: '.json', // Only required in Drupal 7
         };
 
         // Define auth object, set crossDomain if is necessary

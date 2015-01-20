@@ -19,7 +19,13 @@
           dataType: '.json'
         };
         // Define auth object, set crossDomain if is necessary
-        var Auth = new Backbone.Drupal.Auth({crossDomain: true, drupal8: false});
+        var Auth = new Backbone.Drupal.Auth(
+          {
+            crossDomain: true,
+            version: 7
+            dataType: '.json',
+          }
+        );
         // Request executed in sync mode
         // If status is token further ajax will use the proper token
         var status = Auth.login('admin', 'admin');

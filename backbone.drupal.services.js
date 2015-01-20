@@ -10,13 +10,19 @@
 Backbone.Drupal.Models.Node = Backbone.Drupal.Models.Base.extend({
   urlSource: "node",
   idAttribute: "nid",
-
   initialize: function(opts) {
     Backbone.Drupal.Models.Base.prototype.initialize.call(this, opts);
     // Set up common boolean fields for correct JSON format for services
     this.setToJSONProcessor('promote', this.toJSONBoolean);
   },
-
+  save: function(attrs, options) {
+    if(Backbone.Drupal.restEndpoint.version == 8) {
+      // If backend is Drupal 8 change save method to PATCH instead of PUT
+      options.patch = true;
+    }
+    // Proxy the call to the original save function
+    Backbone.Model.prototype.save.call(this, attrs, options);
+  },
   toJSON: function() {
     if(this.backform) {
       return Backbone.Drupal.Models.Base.prototype.toJSON.call(this);
@@ -59,7 +65,15 @@ Backbone.Drupal.Models.Node = Backbone.Drupal.Models.Base.extend({
 // * TODO: Add support for login and logout methods.
 Backbone.Drupal.Models.User = Backbone.Drupal.Models.Base.extend({
   urlSource: "user",
-  idAttribute: "uid"
+  idAttribute: "uid",
+  save: function(attrs, options) {
+    if(Backbone.Drupal.restEndpoint.version == 8) {
+      // If backend is Drupal 8 change save method to PATCH instead of PUT
+      options.patch = true;
+    }
+    // Proxy the call to the original save function
+    Backbone.Model.prototype.save.call(this, attrs, options);
+  },
 });
 
 // ### Backbone.Drupal.Comment
@@ -68,7 +82,14 @@ Backbone.Drupal.Models.User = Backbone.Drupal.Models.Base.extend({
 Backbone.Drupal.Models.Comment = Backbone.Drupal.Models.Base.extend({
   urlSource: "comment",
   idAttribute: "cid",
-
+  save: function(attrs, options) {
+    if(Backbone.Drupal.restEndpoint.version == 8) {
+      // If backend is Drupal 8 change save method to PATCH instead of PUT
+      options.patch = true;
+    }
+    // Proxy the call to the original save function
+    Backbone.Model.prototype.save.call(this, attrs, options);
+  },
   // Override toJSON function to nest all attributes in a { comment: ... } key
   // to make this work with the Services module implementation of comment PUSH/PUT.
   toJSON: function() {
@@ -101,7 +122,14 @@ Backbone.Drupal.Models.Comment = Backbone.Drupal.Models.Base.extend({
 Backbone.Drupal.Models.File = Backbone.Drupal.Models.Base.extend({
   urlSource: "file",
   idAttribute: "fid",
-
+  save: function(attrs, options) {
+    if(Backbone.Drupal.restEndpoint.version == 8) {
+      // If backend is Drupal 8 change save method to PATCH instead of PUT
+      options.patch = true;
+    }
+    // Proxy the call to the original save function
+    Backbone.Model.prototype.save.call(this, attrs, options);
+  },
   // Override toJSON function to nest all attributes in a { file: ... } key
   // to make this work with the Services module implementation of file PUSH/PUT.turn data;
   toJSON: function() {
