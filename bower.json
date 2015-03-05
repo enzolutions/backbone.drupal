@@ -4,7 +4,7 @@
     "backbone.drupal.js",
     "backbone.drupal.services.js"
   ],
-  "version": "0.2.2-beta",
+  "version": "0.2.3-alpha",
   "homepage": "http://enzolutions.com/projects/backbone_drupal/",
   "author": {
     "name": "enzo - Eduardo Garcia",

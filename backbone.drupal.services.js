@@ -37,7 +37,9 @@ Backbone.Drupal.Models.Node = Backbone.Drupal.Models.Base.extend({
       if(this.backform) {
         var attributes = [];
         _.each(data, function(element, index, list) {
-          attributes[index] = element[0].value;
+          if(!_.isEmpty(element[0])) {
+            attributes[index] = element[0].value;
+          }
         });
         return attributes;
       }
