@@ -29,7 +29,9 @@ Check **test/index.html** for Drupal 8 example and **indexd7.html** for  Drupal 
 
 Before to test in Drupal 8 be sure the REST Resource Content for methods Get, Post, Update , Delete and Patch has json as format and Basic Auth as Authentication method.
 
-You can do this with the contributed module [Rest UI](https://www.drupal.org/project/restui) I recommend use the git version until Drupal 8 get his first official release.
+You can enable Rest resources using [Drupal Console](http://drupalconsole.com) command **rest:enable** 
+
+Additionally you could enable Rest resources with contributed module [Rest UI](https://www.drupal.org/project/restui) I recommend use the git version until Drupal 8 get his first official release.
 
 Your configuration must look similar to following image.
 
@@ -177,9 +179,7 @@ Using [CORS](http://enzolutions.com/articles/2014/05/31/what-is-cross-origin-res
 
 Because the Drupal module [CORS](https://www.drupal.org/project/cors) doesn't have a version for Drupal 8 yet and Drupal Core won't have a native solution for that until Drupal 8.1.
 
-I propose a <a href="https://www.drupal.org/files/issues/core-cors-headers-1869548-26.patch">patch</a> for .htacces in order to enable CORS requests using jQuery documented in [issue](https://www.drupal.org/node/1869548#comment-9120317)
-
-In summary you only have to accept the OPTIONS requests as you can see in the following instructions to .htacces
+Meanwhile you must modify you .htaccess file to accept the OPTIONS requests, as you can see in the following instructions to .htacces
 ```
 # Intercept OPTIONS calls
 RewriteCond %{REQUEST_METHOD} OPTIONS
@@ -195,6 +195,8 @@ Also we have to enable REST Methdos POST, GET, OPTIONS, PATCH, DELETE and allow 
   Header always set Access-Control-Allow-Headers: Authorization
 </IfModule>
 ```
+
+Double check your apache has header module or run **sudo a2enmod headers**
 
 Also a intructions to enable Basic Auth is required.
 
