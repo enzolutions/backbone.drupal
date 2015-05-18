@@ -41,6 +41,8 @@ Your configuration must look similar to following image.
 ![REST UI Content](https://raw.githubusercontent.com/enzolutions/backbone.drupal/master/images/backbone.drupal_drupal8_restui_content_resource.png "REST UI Content")
 
 ## Code Sample
+Let me show you an example of how you can use Backbone.Drupal
+
 ````
 <!DOCTYPE html>
 <html lang="en">
