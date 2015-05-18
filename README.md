@@ -29,6 +29,9 @@ Check **test/index.html** for Drupal 8 example and **indexd7.html** for  Drupal 
 
 Before to test in Drupal 8 be sure the REST Resource Content for methods Get, Post, Update , Delete and Patch has json as format and Basic Auth as Authentication method.
 
+However you can use any other Authentication provider if you are instered in create your Authentication Provider you can use the Drupal Console project to generate a new one using the command **generate:authentication:provider**. You can review an implementation using contributed module [IP Consumer Auth](http://drupal.org/project/ip_consumer_auth)
+
+## Enable Rest Resources
 You can enable Rest resources using [Drupal Console](http://drupalconsole.com) command **rest:enable** 
 
 Additionally you could enable Rest resources with contributed module [Rest UI](https://www.drupal.org/project/restui) I recommend use the git version until Drupal 8 get his first official release.
